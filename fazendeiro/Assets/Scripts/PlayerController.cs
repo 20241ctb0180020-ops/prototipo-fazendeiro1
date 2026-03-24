@@ -11,6 +11,9 @@ public class PlayerController : MonoBehaviour
     public InputActionAsset InputActions;
     private InputAction moveAction;
     private InputAction fireAction;
+    private InputAction ghostAction;
+    private IEnumerator coroutine;
+
 
     private void OnEnable()
     {
@@ -24,7 +27,13 @@ public class PlayerController : MonoBehaviour
     {
         moveAction = InputSystem.actions.FindAction("Move");
         fireAction = InputSystem.actions.FindAction("Jump");
+        ghostAction = InputSystem.actions.FindAction("Ghost");
     }
+
+    // void Start()
+    // {
+
+    // }
 
     // Update is called once per frame
     void Update()
@@ -46,6 +55,25 @@ public class PlayerController : MonoBehaviour
         {
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         }
-        
     }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Animais"))
+        {
+            Destroy(gameObject);
+        }
+    }
+    // if (ghostAction.WasPressedThisFrame())
+    // {
+    // coroutine = WaitAndPrint(2.0f);
+    // StartCoroutine(coroutine);
+
+    // print("ghost comecou");
+    // }
+
 }
+// private IEnumerator WaitAndPrint(float waitTime)
+// {
+// yield return new WaitForSeconds(waitTime);
+// print("ghost terminou: " + Time.time + " segundos");
+// }
