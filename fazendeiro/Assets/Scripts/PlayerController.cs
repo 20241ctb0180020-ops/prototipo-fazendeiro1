@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,8 +14,12 @@ public class PlayerController : MonoBehaviour
     private InputAction fireAction;
     private InputAction ghostAction;
     private IEnumerator coroutine;
+    public Renderer aparecer;
 
-
+    void Start()
+    {
+        aparecer = GetComponent<Renderer>();
+    }
     private void OnEnable()
     {
         InputActions.FindActionMap("Player").Enable();
@@ -55,25 +60,24 @@ public class PlayerController : MonoBehaviour
         {
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         }
+         if (ghostAction.WasPressedThisFrame())
+        {
+           coroutine = WaitAndPrint(2.0f);
+           StartCoroutine(coroutine);
+           print("ghost comecou");
+           aparecer.enabled = false;
+        }
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Animais"))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
+        //SceneManager.LoadScene(GameOver);
     }
-    // if (ghostAction.WasPressedThisFrame())
-    // {
-    // coroutine = WaitAndPrint(2.0f);
-    // StartCoroutine(coroutine);
 
-    // print("ghost comecou");
-    // }
-
+    private IEnumerator WaitAndPrint(float waitTime)
+    {
+      yield return new WaitForSeconds(waitTime);
+      print("ghost terminou: " + Time.time + " segundos");
+      aparecer.enabled = true;
+    }
 }
-// private IEnumerator WaitAndPrint(float waitTime)
-// {
-// yield return new WaitForSeconds(waitTime);
-// print("ghost terminou: " + Time.time + " segundos");
-// }

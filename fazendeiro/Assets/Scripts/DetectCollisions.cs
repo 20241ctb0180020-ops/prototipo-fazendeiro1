@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class DetectCollisions : MonoBehaviour
 {
+    // public gameObject placar;
     // Start is called before the first frame update
     void Start()
     {
-
+    
     }
 
     // Update is called once per frame
@@ -18,7 +19,11 @@ public class DetectCollisions : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
-        Destroy(other.gameObject);
+        if (other.gameObject.CompareTag("Animais"))
+        {
+            // placar.Pontuacao(1);
+            Destroy(gameObject);
+            Destroy(other.gameObject);
+        }
     }
 }
