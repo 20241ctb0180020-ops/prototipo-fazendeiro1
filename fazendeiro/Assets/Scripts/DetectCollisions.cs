@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class DetectCollisions : MonoBehaviour
 {
-    // public gameObject placar;
+    int pontuacao;
+    private GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-    
+        player = GameObject.Find("Player");
     }
 
     // Update is called once per frame
@@ -21,7 +23,9 @@ public class DetectCollisions : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Animais"))
         {
-            // placar.Pontuacao(1);
+            pontuacao += 1;
+            Debug.Log("pontuacao: " + pontuacao);
+            // player.Recebe(pontuacao);
             Destroy(gameObject);
             Destroy(other.gameObject);
         }

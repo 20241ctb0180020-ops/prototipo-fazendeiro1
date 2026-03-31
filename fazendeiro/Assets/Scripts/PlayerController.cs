@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,11 +15,15 @@ public class PlayerController : MonoBehaviour
     private InputAction fireAction;
     private InputAction ghostAction;
     private IEnumerator coroutine;
-    public Renderer aparecer;
+    public TextMeshProUGUI VidaText;
+    public TextMeshProUGUI PontuacaoText;
+    int pontuacao1;
+    int vida = 3;
+    // public Renderer aparecer;
 
     void Start()
     {
-        aparecer = GetComponent<Renderer>();
+        // aparecer = GetComponent<Renderer>();
     }
     private void OnEnable()
     {
@@ -60,24 +65,42 @@ public class PlayerController : MonoBehaviour
         {
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         }
-         if (ghostAction.WasPressedThisFrame())
+        if (ghostAction.WasPressedThisFrame())
         {
-           coroutine = WaitAndPrint(2.0f);
-           StartCoroutine(coroutine);
-           print("ghost comecou");
-           aparecer.enabled = false;
+            coroutine = WaitAndPrint(2.0f);
+            StartCoroutine(coroutine);
+            print("ghost comecou");
+            //    aparecer.enabled = false;
         }
+        VidaText.text = "Vida: " + vida.ToString();
+        // PontuacaoText.text = "Pontuação: " + pontuacao1.ToString();
     }
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        Destroy(gameObject);
-        //SceneManager.LoadScene(GameOver);
+        if (collision.gameObject.CompareTag("Animais"))
+        {
+            vida -= 1;
+            if (vida < 1)
+            {
+                Destroy(gameObject);
+                SceneManager.LoadScene("GameOver");
+            }
+            Debug.Log("Vida: " + vida);
+        }
     }
 
     private IEnumerator WaitAndPrint(float waitTime)
     {
-      yield return new WaitForSeconds(waitTime);
-      print("ghost terminou: " + Time.time + " segundos");
-      aparecer.enabled = true;
+        yield return new WaitForSeconds(waitTime);
+        print("ghost terminou: " + Time.time + " segundos");
+        //   aparecer.enabled = true;
+    }
+    public void Uma(int maisum)
+    {
+        Debug.Log(maisum);
+    }
+    public void Recebe(int valor)
+    {
+        pontuacao1 = valor;
     }
 }
