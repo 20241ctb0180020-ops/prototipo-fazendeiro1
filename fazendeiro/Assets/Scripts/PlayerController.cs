@@ -14,16 +14,21 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private InputAction fireAction;
     private InputAction ghostAction;
+    private InputAction pauseAction;
     private IEnumerator coroutine;
+    [SerializeField] private GameObject MenuPausa;
     public TextMeshProUGUI VidaText;
-    public TextMeshProUGUI PontuacaoText;
-    int pontuacao1;
+    // public TextMeshProUGUI PontuacaoText;
+    private Collider colisao;
+    int pontuacao;
     int vida = 3;
-    // public Renderer aparecer;
+    // MoveForward script;
 
     void Start()
     {
-        // aparecer = GetComponent<Renderer>();
+        // script = Object.FindAnyObjectByType<MoveForward>();
+
+        colisao = GetComponent<Collider>();
     }
     private void OnEnable()
     {
@@ -38,12 +43,8 @@ public class PlayerController : MonoBehaviour
         moveAction = InputSystem.actions.FindAction("Move");
         fireAction = InputSystem.actions.FindAction("Jump");
         ghostAction = InputSystem.actions.FindAction("Ghost");
+        pauseAction = InputSystem.actions.FindAction("Pause");
     }
-
-    // void Start()
-    // {
-
-    // }
 
     // Update is called once per frame
     void Update()
@@ -67,13 +68,18 @@ public class PlayerController : MonoBehaviour
         }
         if (ghostAction.WasPressedThisFrame())
         {
-            coroutine = WaitAndPrint(2.0f);
+            coroutine = WaitAndPrint(2f);
             StartCoroutine(coroutine);
             print("ghost comecou");
-            //    aparecer.enabled = false;
+            colisao.enabled = false;
+        }
+        if (pauseAction.WasPressedThisFrame())
+        {
+            InputActions.FindActionMap("Player").Disable();
+            MenuPausa.SetActive(true);
+            // script.Parar(true);
         }
         VidaText.text = "Vida: " + vida.ToString();
-        // PontuacaoText.text = "Pontuação: " + pontuacao1.ToString();
     }
     private void OnTriggerEnter(Collider collision)
     {
@@ -93,14 +99,15 @@ public class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
         print("ghost terminou: " + Time.time + " segundos");
-        //   aparecer.enabled = true;
+        colisao.enabled = true;
     }
-    public void Uma(int maisum)
+    public void Recebe(int receber)
     {
-        Debug.Log(maisum);
+        pontuacao = pontuacao + receber;
     }
-    public void Recebe(int valor)
+    public void Voltar()
     {
-        pontuacao1 = valor;
+        MenuPausa.SetActive(false);
+        InputActions.FindActionMap("Player").Enable();
     }
 }

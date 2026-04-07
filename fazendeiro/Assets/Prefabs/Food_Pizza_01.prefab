@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b1762358acf4b14a9acd1856da7f5e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PontuacaoText: {fileID: 5518850216475262347, guid: fa23921d98e9bba419ee213da3c36929, type: 3}
+  player: {fileID: 4069068401924328741, guid: 6a3582d81ff77e74b9fb768f245290bd, type: 3}
 --- !u!54 &7144558823974642196
 Rigidbody:
   m_ObjectHideFlags: 0
