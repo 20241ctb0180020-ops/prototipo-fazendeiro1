@@ -17,17 +17,16 @@ public class PlayerController : MonoBehaviour
     private InputAction pauseAction;
     private IEnumerator coroutine;
     [SerializeField] private GameObject MenuPausa;
-    public TextMeshProUGUI VidaText;
-    // public TextMeshProUGUI PontuacaoText;
     private Collider colisao;
-    int pontuacao;
     int vida = 3;
-    // MoveForward script;
+    public Desaparecer farmer;
+    public Placar placar;
+    public MoveForward script1;
+    // public MoveForward script2;
+    // public MoveForward script3;
 
     void Start()
     {
-        // script = Object.FindAnyObjectByType<MoveForward>();
-
         colisao = GetComponent<Collider>();
     }
     private void OnEnable()
@@ -68,24 +67,23 @@ public class PlayerController : MonoBehaviour
         }
         if (ghostAction.WasPressedThisFrame())
         {
-            coroutine = WaitAndPrint(2f);
-            StartCoroutine(coroutine);
-            print("ghost comecou");
-            colisao.enabled = false;
+            StartCoroutine(Ghost());
         }
         if (pauseAction.WasPressedThisFrame())
         {
             InputActions.FindActionMap("Player").Disable();
             MenuPausa.SetActive(true);
-            // script.Parar(true);
+            script1.Parar(true);
+            // script2.Parar(true);
+            // script3.Parar(true);
         }
-        VidaText.text = "Vida: " + vida.ToString();
     }
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Animais"))
         {
             vida -= 1;
+            placar.Vida(vida);
             if (vida < 1)
             {
                 Destroy(gameObject);
@@ -95,19 +93,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitAndPrint(float waitTime)
+    private IEnumerator Ghost()
     {
-        yield return new WaitForSeconds(waitTime);
-        print("ghost terminou: " + Time.time + " segundos");
+        farmer.Fantasma(true);
+        colisao.enabled = false;
+        yield return new WaitForSeconds(2f);
         colisao.enabled = true;
-    }
-    public void Recebe(int receber)
-    {
-        pontuacao = pontuacao + receber;
+        farmer.Fantasma(false);
     }
     public void Voltar()
     {
         MenuPausa.SetActive(false);
         InputActions.FindActionMap("Player").Enable();
+        script1.Parar(false);
+        // script2.Parar(false);
+        // script3.Parar(false);
     }
 }

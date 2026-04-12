@@ -5,11 +5,11 @@ using TMPro;
 
 public class DetectCollisions : MonoBehaviour
 {
-    // PlayerController player;
+    public Placar placar;
     // Start is called before the first frame update
     void Start()
     {
-
+        
     }
 
     // Update is called once per frame
@@ -22,7 +22,7 @@ public class DetectCollisions : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Animais"))
         {
-            // player.Recebe(1);
+            placar.Pontuacao();
             Destroy(gameObject);
             Destroy(other.gameObject);
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveForward : MonoBehaviour
 {
-    public float speed = 20f;
+    private float speed = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,15 +17,15 @@ public class MoveForward : MonoBehaviour
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
 
     }
-    // public void Parar(bool parou)
-    // {
-    // if (parou == true)
-    // {
-    // speed = 0;
-    // }
-    // else
-    // {
-    // speed = 20;
-    // }
-    // }
+    public void Parar(bool parou)
+    {
+    if (parou == true)
+    {
+        speed = 0;
+    }
+    else
+    {
+        speed = 5;
+    }
+    }
 }
