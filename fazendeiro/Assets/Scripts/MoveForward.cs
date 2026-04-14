@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MoveForward : MonoBehaviour
 {
-    private float speed = 5f;
+    private float speed = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,13 +19,13 @@ public class MoveForward : MonoBehaviour
     }
     public void Parar(bool parou)
     {
-    if (parou == true)
-    {
-        speed = 0;
-    }
-    else
-    {
-        speed = 5;
-    }
+        if (parou == true)
+        {
+            speed = 0;
+        }
+        else
+        {
+            speed = 5;
+        }
     }
 }

@@ -5,24 +5,28 @@ public class Placar : MonoBehaviour
 {
     public TextMeshProUGUI PontuacaoText;
     public TextMeshProUGUI VidaText;
-    int pontuacaoplacar = 0;
+    int pontuacao = 0;
     int vidaplacar = 3;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        PontuacaoText.text = "Pontuacao: " + pontuacaoplacar.ToString();
+        PontuacaoText.text = "Pontuacao: " + pontuacao.ToString();
         VidaText.text = "Vida: " + vidaplacar.ToString();
     }
-    public void Pontuacao()
+    public void Pontuacao(int valor)
     {
-        pontuacaoplacar += 1;
-        Debug.Log("Pontuacao: "+ pontuacaoplacar);
+        pontuacao = pontuacao + valor;
+        if (pontuacao < 1)
+        {
+            pontuacao = 0;
+        }
+        Debug.Log("Pontuacao: " + pontuacao);
     }
     public void Vida(int player)
     {

@@ -562,9 +562,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3490795014923219912}
   - component: {fileID: 3490795014930591350}
-  - component: {fileID: 3490795014712493952}
   - component: {fileID: 1317163829885812727}
   - component: {fileID: 2468148037618812111}
+  - component: {fileID: 5185354008124382329}
   m_Layer: 0
   m_Name: Animal_Doe_01
   m_TagString: Animais
@@ -619,19 +619,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3490795014712493952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3490795014923457838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4b6c12f354760d45aa6dcd5093df70e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!114 &1317163829885812727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -665,6 +652,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.19350564, y: 0.36498904, z: 0.36640596}
   m_Center: {x: -0.0022704036, y: 0.17317908, z: 0.044287063}
+--- !u!114 &5185354008124382329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3490795014923457838}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4b6c12f354760d45aa6dcd5093df70e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MoveForward
 --- !u!1 &3490795014923463584
 GameObject:
   m_ObjectHideFlags: 0

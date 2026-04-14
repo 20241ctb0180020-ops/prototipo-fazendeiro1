@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -20,13 +21,12 @@ public class PlayerController : MonoBehaviour
     int vida = 3;
     public Desaparecer farmer;
     public Placar placar;
-    public MoveForward script1;
-    // public MoveForward script2;
-    // public MoveForward script3;
+    public GameObject animal;
 
     void Start()
     {
         colisao = GetComponent<Collider>();
+        animal = GameObject.FindWithTag("Animais");
     }
     private void OnEnable()
     {
@@ -72,9 +72,6 @@ public class PlayerController : MonoBehaviour
         {
             InputActions.FindActionMap("Player").Disable();
             MenuPausa.SetActive(true);
-            script1.Parar(true);
-            // script2.Parar(true);
-            // script3.Parar(true);
         }
     }
     private void OnTriggerEnter(Collider collision)
@@ -104,9 +101,6 @@ public class PlayerController : MonoBehaviour
     {
         MenuPausa.SetActive(false);
         InputActions.FindActionMap("Player").Enable();
-        script1.Parar(false);
-        // script2.Parar(false);
-        // script3.Parar(false);
     }
     public void Sair()
     {

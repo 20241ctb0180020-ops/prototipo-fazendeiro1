@@ -9,22 +9,25 @@ public class DestroyOutOfBounds : MonoBehaviour
 {
     private float topBound = 30f;
     private float lowerBound = -10f;
+    // private GameObject placar;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        // placar = FindObjectOfType<Placar>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        var placar = FindObjectOfType<Placar>();
         if (transform.position.z > topBound)
         {
             Destroy(gameObject);
         }
         if (transform.position.z < lowerBound)
         {
+            placar.Pontuacao(-1);
             Destroy(gameObject);
             Exit();
         }
