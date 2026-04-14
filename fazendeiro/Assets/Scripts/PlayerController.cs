@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
@@ -108,5 +107,9 @@ public class PlayerController : MonoBehaviour
         script1.Parar(false);
         // script2.Parar(false);
         // script3.Parar(false);
+    }
+    public void Sair()
+    {
+        Application.Quit();
     }
 }

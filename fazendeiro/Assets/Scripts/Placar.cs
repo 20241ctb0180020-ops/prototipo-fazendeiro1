@@ -5,12 +5,12 @@ public class Placar : MonoBehaviour
 {
     public TextMeshProUGUI PontuacaoText;
     public TextMeshProUGUI VidaText;
-    int pontuacaoplacar;
+    int pontuacaoplacar = 0;
     int vidaplacar = 3;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        pontuacaoplacar = 0;
+        
     }
 
     // Update is called once per frame
